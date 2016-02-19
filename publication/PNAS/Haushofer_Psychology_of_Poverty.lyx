@@ -1,0 +1,3193 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+\usepackage{amsfonts}
+\usepackage{chicago}
+\usepackage{pdflscape}
+\usepackage{appendix}
+\usepackage{hyperref}
+\usepackage[letterpaper,top=1in,right=1in,left=1in,bottom=1in]{geometry}
+\usepackage[bottom]{footmisc}
+%\usepackage{fancyhdr}
+\usepackage{bibentry}
+\usepackage{threeparttable}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{cite}
+
+\setcounter{MaxMatrixCols}{10}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+% For centered entries: 
+% Allow line breaks with \\ in specialcells
+\newcommand{\specialcell}[2][c]{%
+\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+}
+
+% For left-aligned entries:
+%% Allow line breaks with \\ in specialcells
+%\newcommand{\specialcell}[2][c]{%
+%\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}% missing % in original
+%                       %%%
+%}
+
+% *****************************************************************
+% siunitx
+% *****************************************************************
+\newcommand{\sym}[1]{\rlap{#1}} % Thanks to Joseph Wright & David Carlisle
+
+\usepackage{siunitx}
+    \sisetup{
+        detect-mode,
+        group-digits            = false,
+        input-symbols           = ( ) [ ] - +,
+        tight-spacing		= true,
+        table-align-text-post   = false,
+        input-signs             = ,
+        }   
+
+% Packages for tables
+\usepackage{booktabs}% Pretty tables
+\usepackage{threeparttablex}% For Notes below table
+
+% Character substitution that prints brackets and the minus symbol in text mode. Thanks to David Carlisle
+\def\yyy{%
+  \bgroup\uccode`\~\expandafter`\string-%
+  \uppercase{\egroup\edef~{\noexpand\text{\llap{\textendash}\relax}}}%
+  \mathcode\expandafter`\string-"8000 }
+
+\def\xxxl#1{%
+\bgroup\uccode`\~\expandafter`\string#1%
+\uppercase{\egroup\edef~{\noexpand\text{\noexpand\llap{\string#1}}}}%
+\mathcode\expandafter`\string#1"8000 }
+
+\def\xxxr#1{%
+\bgroup\uccode`\~\expandafter`\string#1%
+\uppercase{\egroup\edef~{\noexpand\text{\noexpand\rlap{\string#1}}}}%
+\mathcode\expandafter`\string#1"8000 }
+
+\def\textsymbols{\xxxl[\xxxr]\xxxl(\xxxr)\yyy}
+
+
+% *****************************************************************
+% Estout related things
+% *****************************************************************
+\let\estinput=\input % define a new input command so that we can still flatten the document
+
+\newcommand{\estwide}[3]{
+        \vspace{.75ex}{
+            \textsymbols% Note the added command here
+            \begin{tabular*}
+            {\textwidth}{@{\hskip\tabcolsep\extracolsep\fill}l*{#2}{#3}}
+            \toprule
+            \estinput{#1}
+            \bottomrule
+            \addlinespace[.75ex]
+            \end{tabular*}
+            }
+        }   
+
+\newcommand{\estauto}[3]{
+        \vspace{.75ex}{
+            \textsymbols% Note the added command here
+            \begin{tabular}{l*{#2}{#3}}
+            \toprule
+            \estinput{#1}
+            \bottomrule
+            \addlinespace[.75ex]
+            \end{tabular}
+            }
+        }
+
+% *****************************************************************
+% Custom subcaptions
+% *****************************************************************
+% Note/Source/Text after Tables
+% The new approach using threeparttables to generate notes that are the exact width of the table.
+\newcommand{\Figtext}[1]{%
+    \begin{tablenotes}[para,flushleft]
+    \hspace{6pt}
+    \hangindent=1.75em
+    #1
+    \end{tablenotes}
+    }
+\newcommand{\Fignote}[1]{\Figtext{\emph{Note:~}~#1}}
+\newcommand{\Figsource}[1]{\Figtext{\emph{Source:~}~#1}}
+\newcommand{\Starnote}{\Figtext{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}}% Add significance note with \starnote
+
+% To adjust margins: 
+\usepackage{changepage}
+
+\usepackage{bbm}
+\usepackage{bm}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\paragraph_spacing onehalf
+The Psychology of Poverty: Evidence from 43 Countries
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I thank Victoria Baranov, Esther Duflo, Ernst Fehr, David Laibson, Nathan
+ Nunn, Daniel Sacks, and the members of the Harvard Program in History,
+ Politics, and Economics for valuable feedback.
+ This research was supported by Cogito Foundation Grant R-116/10 and NIH
+ Grant R01AG039297.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Johannes Haushofer
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Abdul Latif Jameel Poverty Action Lab, MIT.
+ 30 Wadsworth St., Cambridge, MA 02142 
+\begin_inset CommandInset href
+LatexCommand href
+name "joha@mit.edu"
+target "joha@mit.edu"
+type "mailto:"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Classification
+\series bold
+: 
+\series default
+\emph default
+Social sciences: Psychological and cognitive sciences
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Keywords:
+\series bold
+\emph default
+ 
+\series default
+poverty, psychology, happiness, Easterlin paradox 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\paragraph_spacing single
+Does poverty have psychological consequences? Beginning with Easterlin 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{easterlin_does_1974}
+\end_layout
+
+\end_inset
+
+, a growing literature has investigated the association between income levels
+ and psychological outcomes.
+ However, this literature remains focused on happiness and life satisfaction,
+ while little evidence exists about the link between income and other psychologi
+cal outcomes.
+ Using World Value Survey data from 114,378 respondents in 43 countries,
+ I show here that income is associated with a host of additional psychological
+ variables.
+ Specifically, low incomes predict lower intrinsic motivation and trust,
+ less prosocial attitudes, and more feelings of meaninglessness.
+ These relationships hold for both poor compared to rich people in the same
+ country, and for poor compared to rich countries.
+ Income inequality is an additional predictor of psychological outcomes
+ across countries, and is associated with loneliness, short-sightedness,
+ risk-taking, and low trust; in contrast, GDP growth is not significantly
+ associated with psychological outcomes.
+ All results are robust to controls for individual-level socioeconomic and
+ country-level geopolitical characteristics.
+ Together, these results suggest that income and income inequality are related
+ to a broad array of psychological outcomes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Significance statement
+\end_layout
+
+\begin_layout Standard
+Whether poverty affects happiness is a long-standing question in social
+ science, but it remains unknown whether income affects other dimensions
+ of psychological well-being.
+ In this study, we use data from 114,378 respondents in 43 countries to
+ show that income is associated with a host of adverse psychological outcomes:
+ both within and across countries, the poor have lower intrinsic motivation
+ and trust, fewer prosocial attitudes, and more feelings of meaninglessness.
+ Income inequality is an additional predictor of psychological outcomes
+ across countries, and is associated with loneliness, short-sightedness,
+ risk-taking, and low trust; in contrast, GDP growth is not significantly
+ associated with psychological outcomes.These results suggest that income
+ and income inequality are related to a broad array of psychological outcomes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "Introduction"
+
+\end_inset
+
+Introduction
+\end_layout
+
+\begin_layout Standard
+Poverty is most frequently conceptualized in terms of material scarcity.
+ However, a small number of scholars have suggested over the centuries that
+ the lives of the poor may be characterized not only by material deprivation,
+ but also negative psychological outcomes.
+ In the 
+\emph on
+Theory of Moral Sentiments
+\emph default
+, Adam Smith 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{smith_theory_2010}
+\end_layout
+
+\end_inset
+
+ cast poverty in terms of its psychological consequences: “[t]he reason
+ poverty causes pain is not just because it can leave people feeling hungry,
+ cold and sick, but because it is associated with unfavourable regard.
+ … The poor man … is ashamed of his poverty.” In his prominent ethnography
+ 
+\emph on
+Five Families: Mexian Case Studies in the Culture of Poverty
+\emph default
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{lewis_five_1959}
+\end_layout
+
+\end_inset
+
+, anthropologist Oscar Lewis argued that the lives of the poor were characterize
+d by “a strong feeling of marginality, of helplessness, of dependency, of
+ not belonging … of inferiority, of personal unworthiness.” A few years later,
+ the controversial 
+\emph on
+Moynihan Report
+\emph default
+ claimed that poor families in the United States were caught in a “tangle
+ of pathology” 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{moynihan_employment_1965}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+These suggestions are easy to misunderstand as blaming the poor for their
+ poverty by attributing to them certain psychological “shortcomings” which
+ keep them mired in poverty.
+ Possibly for this reason, the relationship between poverty and psychological
+ outcomes has only recently limited attention in the literature.
+ However, in 1970s, the question that follows from the assertions cited
+ above was posed in earnest: is it true empirically that poverty has psychologic
+al correlates? 
+\end_layout
+
+\begin_layout Standard
+Most of the resulting literature has concerned itself with the empirical
+ relationship between income and self-reported happiness.
+ Are poor people unhappier than richer people? In a series of papers, Richard
+ Easterlin found that happiness and income were correlated within countries,
+ but not across countries; in addition, increases in national income over
+ time did not translate into increases in average self-reported happiness.
+ Within countries, however, the poor consistently reported lower levels
+ of happiness than the rich 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{easterlin_does_1974,easterlin_will_1995,easterlin_income_2001,easterli
+n_explaining_2003,easterlin_happiness_2009}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+More recently, however, Easterlin’s cross-country finding has been overturned
+ by an analysis of a large number of datasets from a broad panel of countries
+ by Stevenson, Wolfers, and Sacks 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{stevenson_economic_2008,sacks_subjective_2010,sacks_new_2012}
+\end_layout
+
+\end_inset
+
+.
+ These authors find a robust relationship between self-reported happiness
+ and life satisfaction, both within and across countries.
+ 
+\lang english
+Similarly, Kahneman and Deaton 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{kahneman_high_2010}
+\end_layout
+
+\end_inset
+
+ show that in the US, higher levels of income and education are correlated
+ with life satisfaction.
+
+\lang american
+ In addition, happiness has also been associated with income inequality;
+ Oishi et al.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{oishi_income_2011}
+\end_layout
+
+\end_inset
+
+ find that years with lower levels of income inequality in the US are associated
+ with higher levels of self-reported happiness.
+ Thus, it appears that poverty and inequality are correlated with self-reported
+ happiness and life satisfaction.
+ However, it remains unclear whether poverty and inequality affect psychological
+ outcomes beyond self-reported happiness and life satisfaction.
+ In this paper, we use World Value Survey data from 114,378 respondents
+ in 43 countries and show that both within and across countries, low incomes
+ are correlated with low intrinsic motivation and trust, less prosocial
+ attitudes, and more feelings of meaninglessness.
+ Income inequality across countries correlates with loneliness, short-sightednes
+s, risk-taking, and low trust.
+ These results suggest that poverty and income inequality have broad psychologic
+al consequences.
+ 
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Subsubsection*
+Within-country results
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig_micro-1"
+
+\end_inset
+
+ plots responses to the psychological survey questions against within-country
+ income category.
+ The corresponding regression results are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "within"
+
+\end_inset
+
+.
+ Each column represents one psychological outcome variable, corresponding
+ to Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "psychvar_overview"
+
+\end_inset
+
+; the rows represent the regression coefficients on the predictor variables
+ and their significance levels, both without the set of individual controls
+ (top panel) and with these controls (bottom panel).
+ It can be seen that all of the coefficients on the income variable are
+ different from zero and highly significant.
+ Specifically, poorer individuals show more internal locus of control, less
+ intrinsic motivation, less prosocial attitudes, lower trust, more feelings
+ of loneliness and meaninglessness, lower risk-taking, and more short-sightednes
+s than richer individuals.
+ All of these results are robust to the inclusion of individual-level control
+ variables (note that country-level control variables would be collinear
+ with the country-level fixed effects), and are jointly significant.
+ Thus, this table reveals a robust relationship between my psychological
+ outcomes of interest and household income.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Cross-country results
+\end_layout
+
+\begin_layout Standard
+I next ask whether the relationship between income and psychological outcomes
+ that I observe within countries is also evident across countries.
+ In other words, do we see different psychological outcomes in contries
+ that are richer, grow faster, or are more or less unequal than others?
+ 
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig_macro"
+
+\end_inset
+
+ illustrates the relationship between psychological outcomes and log GDP
+ across countries.
+ The corresponding cross-country regression results are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "across_lgdp"
+
+\end_inset
+
+.
+ The individual coefficients on log GDP are significant for several outcome
+ variables; in particular, even after the inclusion of controls, poorer
+ countries show less intrinsic motivation, trust, fewer prosocial attitudes,
+ more feelings of meaninglessness, and higher risk aversion than richer
+ countries.
+ These results are all statistically significant, and so is test of joint
+ significance.
+ In addition, all coefficients are identical in sign compared to the within-coun
+try results, with one exception: risk aversion is increasing in across-country
+ income, but decreasing in within-country income.
+ 
+\end_layout
+
+\begin_layout Standard
+Turning next to inequality, I report the regresssion results using the Gini
+ coefficient as an independent variable in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "across_ineq"
+
+\end_inset
+
+.
+ Both with and without control variables, the tests of joint significance
+ are highly significant, suggesting that inequality is associated with psycholog
+ical outcomes.
+ The individual regression reveal that, after the inclusion of control variables
+, countries with higher levels of inequality have lower trust, more feelings
+ of loneliness and meaninglessness, an inceased willingness to help one's
+ family, and more short-sightedness and risk-taking.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the results for GDP growth results are weaker; the test of joint
+ significance is not significant when control variables are included, and
+ no individual regression shows a significant coeficient on the GDP growth
+ variables when controls are included.
+ These results suggest that growth may not be significantly related to psycholog
+ical outcomes.
+ 
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Standard
+The purpose of this paper was to ask whether poverty has particular psychologica
+l consequences.
+ A long-standing literature has investigated the association between income
+ and happiness; the most recent contributions to this literature document
+ an assocation between income and happiness that obtains both within countries,
+ as well as across countries.
+ Our findings add to this literature in three ways: 
+\end_layout
+
+\begin_layout Standard
+First, we extend previous findings to other psychological outcome variables.
+ For decades, the literature on income and psychological outcomes has mainly
+ been concerned with happiness and life satisfaction; however, data for
+ a host of other important psychological outcome variables is available,
+ and our results show that these variables, too, show strong associations
+ with income.
+ In demonstrating the associations described above, our study lends support
+ to a small number of studies that have shown similar associations for optimism,
+ locus of control, and self-esteem 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{maqsud_relationships_1991,sherman_interrelationships_1978,twenge_self-
+esteem_2002,scheier_optimism_1985,robb_socioeconomic_2009,lynch_understanding_19
+97,taylor_psychosocial_1999}
+\end_layout
+
+\end_inset
+
+.
+ However, note that these findings were largely obtained in much smaller
+ samples, often in particular population subgroups.
+ 
+\end_layout
+
+\begin_layout Standard
+Second, our findings lend support to the most recent results by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{stevenson_economic_2008}
+\end_layout
+
+\end_inset
+
+, which show that the correlation between income and happiness also holds
+ across countries, in contrast to the early findings by Easterlin 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{easterlin_does_1974}
+\end_layout
+
+\end_inset
+
+.
+ In particular, we find that for all variables under consideration, there
+ is both a within-country correlation with income category, and a cross-country
+ correlation with country GDP.
+ In contrast, however, we find no association between any of our psychological
+ outcome variables and GDP growth; thus, as countries get richer, they do
+ not appear to cahnge much in the psychological variables we consider here.
+ A potential explanation for this somewhat surprising result is that yearly
+ GDP growth, which we used here as the growth variable, may be too volatile
+ and short-term to be reflected in psychological outcomes; a variable that
+ aggregates growth over a longer time horizon may show more of an association
+ with psychological outcomes in future work.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, our findings show that inequality is associated with psychological
+ outcomes.
+ Previous studies have focused largely on the relationship between psychological
+ outcomes and income variables.
+ In one study using inequality as a predictor variable, Oishi et al.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{oishi_income_2011}
+\end_layout
+
+\end_inset
+
+ find that years with lower levels of income inequality in the US are associated
+ with higher levels of self-reported happiness.
+ We complement this finding by showing that a similar relationship holds
+ 
+\emph on
+across
+\emph default
+ countries: more unequal countries have different psychological outcomes
+ than more equal countries, 
+\emph on
+viz.
+ 
+\emph default
+lower trust, more feelings of loneliness and meaninglessness, an inceased
+ willingness to help one's family, and more short-sightedness and risk-taking.
+ 
+\end_layout
+
+\begin_layout Standard
+In sum, I show a robust effect of income and inequality on a variety of
+ psychological outcomes.
+ This relationship is robust to a number of control variables.
+ It holds both within and across countries, and obtains in the cross-country
+ specifications for GDP levels, but not GDP growth.
+ Together, these findings suggest that poverty may have significant psychologica
+l costs that go beyond economic welfare.
+ One might argue that these costs should be on the radar of policymakers,
+ since they imply that poverty alleviation programs, to the extent that
+ they affect these measures of psychological welfare, have to be evaluated
+ not only in terms of their economic effects, but also on their contributions
+ to psychological well-being.
+ 
+\end_layout
+
+\begin_layout Section
+Materials and methods
+\end_layout
+
+\begin_layout Subsubsection*
+Psychological variables
+\end_layout
+
+\begin_layout Standard
+The psychological outcome variables were taken from the 
+\emph on
+World Values Survey 
+\emph default
+and the
+\emph on
+ European Values Survey
+\emph default
+ (www.wvs.org).
+ These surveys are administered in discrete waves; some of the variables
+ used here were collected in several waves, while others were collected
+ in only one wave (see Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "psychvar_overview"
+
+\end_inset
+
+).
+ Most of the country-specific samples are nationally representative; I exlude
+ countries for which the national samples are not representative or for
+ which sampling weights are not available.
+ For my variables of interest, the data cover the years 1980-2008, and 114,378
+ respondents in 43 countries.
+ 
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "psychvar_overview"
+
+\end_inset
+
+ summarizes the psychological variables of interest.
+ They were chosen to approximate the following constructs: locus of control,
+ intrinsic motivation, prosocial attitudes, feelings of loneliness and meaningle
+ssness, short-sightedness, and risktaking.
+ In the following, I briefly explain how each of these variables approximates
+ the underlying construct.
+ 
+\end_layout
+
+\begin_layout Standard
+Locus of control is the degree to which an individual things their life
+ outcomes are determined by their own actions (internal locus of control)
+ vs.
+ by events beyond their control (external locus of control 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortciteNP{rotter_generalized_1966}
+\end_layout
+
+\end_inset
+
+).
+ Here, I use the following WVS question to approximate this construct: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Some people believe that individuals can decide their own destiny, while
+ others think that it is impossible to escape a predetermined fate.
+ Please tell me which comes closest to your view on this scale on which
+ 1 means 'everything in life is determined by fate,' and 10 means that 'people
+ shape their fate themselves'
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This question is similar to many of the questions on the standard instrument
+ for locus of control, Rotter's 1966 scale.
+ For instance, Rotter's scale asks for agreement with statements such as
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Trusting fate has never turned out as well for me as making a decision to
+ take a definite course of action
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+Becoming a success is a matter of hard work, luck has little or nothing
+ to do with it
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+I approximate intrinsic motivation with two questions: agreement with the
+ statements 
+\begin_inset Quotes eld
+\end_inset
+
+Working for a living is a necessity; I wouldn’t work if I didn’t have to
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+I do the best I can regardless of pay
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Deci 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{deci_intrinsic_1972}
+\end_layout
+
+\end_inset
+
+ defined intrinsic motivation as an interest in a task, or desire to complete
+ it, without external rewards.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Deci, E.
+ L.
+ (1971).
+ Effects of externally mediated rewards on intrinsic motivation.
+ Journal of Personality and Social Psychology, 18, 105-115.
+\end_layout
+
+\end_inset
+
+ Concomitantly, items on standard inventories of intrinsic motivation, such
+ as Ryan's 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{ryan_control_1982}
+\end_layout
+
+\end_inset
+
+ Intrinsic Motivation Inventory
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Control and Information in the Intrapersonal Sphere: An Extension of Cognitive
+ Evaluation Theory, Ryan JPSP 1982
+\end_layout
+
+\end_inset
+
+, probe whether respondents try hard at and enjoy tasks and work for which
+ they receive no compensation (e.g.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+I enjoyed this task very much
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+I tried very hard
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+I put in a lot of effort
+\begin_inset Quotes erd
+\end_inset
+
+).
+ The two items chosen here thus closely match the construct.
+\end_layout
+
+\begin_layout Standard
+To approximate trust, I use the following item: 
+\begin_inset Quotes eld
+\end_inset
+
+Do you trust people you meet for the very first time?
+\begin_inset Quotes erd
+\end_inset
+
+ This item is similar to questions on standard trust scales such as that
+ of Rotter 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{rotter_new_1967}
+\end_layout
+
+\end_inset
+
+, which ask for agreement with statements such as: 
+\begin_inset Quotes eld
+\end_inset
+
+In dealing with strangers one is better off to be cautious until they have
+ provided evidence that they are trustworthy
+\begin_inset Quotes erd
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+A new scale for the measurement of interpersonal trust1 JB Rotter - Journal
+ of personality, 1967
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The following item approximates pro-social attitudes: 
+\begin_inset Quotes eld
+\end_inset
+
+Would you be prepared to actually do something to improve the conditions
+ of your immediate family?
+\begin_inset Quotes erd
+\end_inset
+
+ This item is similar to questions on standard scales of pro-social attitudes;
+ e.g., Berkowitz & Daniel's 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{berkowitz_affecting_1964}
+\end_layout
+
+\end_inset
+
+ Revised Social Responsibility Scale 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Berkowitz Daniels 1964 Journal of Abnormal and Social Psychology 1964, Vol.
+ 68, No.
+ 3, 275-281
+\end_layout
+
+\end_inset
+
+ asks respondents for agreement with statements such as 
+\begin_inset Quotes eld
+\end_inset
+
+I am the kind of person that people can count on
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+I would never let a friend down when he expects something of me
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Loneliness was approximated with the question: 
+\begin_inset Quotes eld
+\end_inset
+
+During the past few weeks, did you ever feel very lonely or remote from
+ other people?
+\begin_inset Quotes erd
+\end_inset
+
+ This question is similar to questions on standard inventories such as the
+ UCLA Loneliness Scale 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{russell_developing_1978}
+\end_layout
+
+\end_inset
+
+, which contains items such as 
+\begin_inset Quotes eld
+\end_inset
+
+I feel completely alone
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+I feel isolated from others
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Feelings of meaninglessness are a common feature of depression, and are
+ probed here with the following question: 
+\begin_inset Quotes eld
+\end_inset
+
+How often, if at all, do you have the feeling that life is meaningless?
+\begin_inset Quotes erd
+\end_inset
+
+ This question is typical of depression questionnaires that measure meaninglessn
+ess 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{yesavage_development_1983,hall_factor_2010,selm_meaninglessness_1998}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the WVS data contain two questions that measure constructs I call
+ 
+\begin_inset Quotes eld
+\end_inset
+
+short-sighted
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+risk-taking
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Short-sightedness is captured by agreement with the statement 
+\begin_inset Quotes eld
+\end_inset
+
+The future is so uncertain that it is best to live form day to day.
+\begin_inset Quotes erd
+\end_inset
+
+ Risk-taking is captured by asking whether a person described as follows
+ is like the respondent: 
+\begin_inset Quotes eld
+\end_inset
+
+Would you please indicate how much this person is like you? Adventure and
+ taking risks are important to this person; to have an exciting life.
+\begin_inset Quotes erd
+\end_inset
+
+ This question is closely related to the standard sensation-seeking scale,
+ in particular its thrill and adventure seeking subscale 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{zuckerman_dimensions_1971}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Before analysis, all of these variables are z-scored.
+ For within-country regressions, this process is performed at the country
+ level; for across-country regressions, it is perfomed at the global level.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Control variables 
+\end_layout
+
+\begin_layout Standard
+In addition to these outcome variables of interest, I use the following
+ control variables.
+ First, on the individual level, I use gender (female dummy), age up to
+ a quartic, an interaction of age with the female dummy, also up to a quartic;
+ a dummy for being married; and the number of children.
+ Second, on the country level, I use dummies for being landlocked, socialist,
+ in the Southern hemisphere, having had an external war between 1960 and
+ 1985, and several regional dummies (Sub-Saharan Africa, Africa, EU, Latin
+ America, South Asia, East and South-East Asia, Asia); the country's population,
+ the percentage of the country's population classified as 
+\begin_inset Quotes eld
+\end_inset
+
+urban
+\begin_inset Quotes erd
+\end_inset
+
+, the country's land area (sq km), its average elevation, the percentage
+ of its land area in geographical tropics, calculated in the equal area
+ projection, and the percentage of its population in the geographical tropics,
+ calculated using a geographical tropics mask.
+ These variables all come from Gallup et al.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+shortcite{gallup_geography_1999}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Economic data
+\end_layout
+
+\begin_layout Standard
+Within-country income data was obtained from the
+\emph on
+ World Value Survey
+\emph default
+ and 
+\emph on
+European Value Survey
+\emph default
+ data.
+ Specifically, the questionnaires for all countries countained a variable
+ asking respondents about their household income.
+ This variable was coded on a scale from 1-10, corresponding to income deciles
+ for the country of residence.
+ Thus, 1 means than the respondent was in the lowest 10% of income earners
+ in their country of residence; 10 indicates that they were in the top 10%.
+ We first z-score this variable and then use it as the main independent
+ variable in the within-country regressions.
+ 
+\end_layout
+
+\begin_layout Standard
+GDP and GDP growth data were taken from the 
+\emph on
+World Development Indicators
+\emph default
+ published by the World Bank.
+ The data cover the years 1960-2010.
+ GDP is measured per capita at purchasing power parity in constant 2005
+ US dollars.
+ As is common practice, we use the natural logarithm of GDP.
+ Growth is measured in % of real GDP.
+ These variables are the main independent variables in the cross-country
+ regressions.
+\end_layout
+
+\begin_layout Standard
+Inequality was measured using the Gini coefficients provided by the University
+ of Texas Inequality Project (http://utip.gov.utexas.edu/data.html).
+ The Gini coefficient is a measure of inequality based on the Lorenz curve,
+ which plots cumulative income in a population against the cumulative share
+ of people in the population, ordered from lowest to highest shares of income.
+ The Gini coefficient is computed from this curve as the ratio of the area
+ between the Lorenz curve and the 45 degree line to the area between the
+ 45 degree line and the x-axis.
+ Mathematically, for a cumulative distribution function 
+\begin_inset Formula $F\left(y\right)$
+\end_inset
+
+ with mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the Gini coefficient 
+\begin_inset Formula $G$
+\end_inset
+
+ is given by: 
+\begin_inset Formula 
+\[
+G=\frac{1}{\mu}\int_{0}^{\infty}F\left(y\right)\left(1-F\left(y\right)\right)dy
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, the Gini coefficient is zero for perfect equality, i.e.
+ all members of a population have the same income, and one for perfect inequalit
+y, i.e.
+ one member of the population has all the income.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Econometric approach
+\end_layout
+
+\begin_layout Paragraph*
+Within countries 
+\end_layout
+
+\begin_layout Standard
+Our first question is whether 
+\emph on
+within
+\emph default
+ countries, poorer respondents show different psychological outcomes compared
+ to richer respondents.
+ To answer this question, we regress each variable of interest on the within-cou
+ntry income categories for each respondent household.
+ Specifically, we fit the following OLS model for each variable of interest:
+ 
+\begin_inset Formula 
+\[
+Psych_{ict}=\alpha_{ct}+\beta_{0}+\beta_{1}Inc_{ict}+\mathbf{\gamma_{ict}}\mathbf{X}_{\mathbf{ict}}+\varepsilon_{ict}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $Psych_{ict}$
+\end_inset
+
+ is the household-, country-, and year-specific response on the psychological
+ variable of interest, 
+\begin_inset Formula $Inc_{ict}$
+\end_inset
+
+ is the household's income category on a scale from 1 (low) to 10 (high),
+ 
+\begin_inset Formula $\alpha_{ct}$
+\end_inset
+
+ captures country and year fixed effects, and 
+\begin_inset Formula $\varepsilon_{ict}$
+\end_inset
+
+ is the error term.
+ 
+\begin_inset Formula $\mathbf{X}_{\mathbf{ict}}$
+\end_inset
+
+ is a vector of within-country controls, as described above.
+ I run this specification both with and without the inclusion of this vector
+ of controls.
+ Obervations are weighted with the survey weights provided in the 
+\emph on
+World Values Survey
+\emph default
+ dataset, and tandard errors are clustered at the country-year level and
+ adjusted for heteroskedasticity.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Across countries 
+\end_layout
+
+\begin_layout Standard
+To assess whether respondents in poorer countries have different psychological
+ outcomes on average than those in richer countries, we estimate the following
+ models: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Psych_{ict}=\beta_{0}+\beta_{1}\ln y_{ct}+\mathbf{\gamma_{ict}}\mathbf{X}_{\mathbf{ict}}+\mathbf{\delta_{ct}}\mathbf{\Gamma}_{\mathbf{ct}}+\varepsilon_{ict}\label{eq:}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Psych_{ict}=\beta_{0}+\beta_{1}G_{ct}+\mathbf{\gamma_{ict}}\mathbf{X}_{\mathbf{ict}}+\mathbf{\delta_{ct}}\mathbf{\Gamma}_{\mathbf{ct}}+\varepsilon_{ict}\label{eq:-2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Psych_{ict}=\beta_{0}+\beta_{1}\left(\frac{y_{c,t}-y_{c,t-1}}{y_{c,t-1}}\right)+\mathbf{\gamma_{ict}}\mathbf{X}_{\mathbf{ict}}+\mathbf{\delta_{ct}}\mathbf{\Gamma}_{\mathbf{ct}}+\varepsilon_{ict}\label{eq:-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $y_{ct}$
+\end_inset
+
+ is the GDP of country 
+\begin_inset Formula $c$
+\end_inset
+
+ in year 
+\begin_inset Formula $t$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{\Gamma_{ct}}$
+\end_inset
+
+ is the set of country-level controls described above.
+ The three specifications thus test, respectively, the relationship between
+ psychological outcomes and the log of GDP (equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:"
+
+\end_inset
+
+), GDP growth (equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:-1"
+
+\end_inset
+
+), and the Gini coefficient (equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:-2"
+
+\end_inset
+
+).
+ Again these equations are estimated both with and without the set sof controls,
+ and standard errors are adjusted for heteroskedasticity and clustered at
+ the country-year level.
+ Observations are weighted with the inverse frequency of observations per
+ country, such that each country is weighted equally.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Joint significance
+\end_layout
+
+\begin_layout Standard
+The regressions of the psychological outcomes on income, growth, and inequality
+ constitute a system of seemingly unrelated regression equations (SUR) that
+ can be efficiently estimated with feasible generalized least squares (FGLS).
+ This approach allows us to assess whether each of the independent variables
+ of interest (income, log GDP, GDP growth, and Gini coefficient) has an
+ effect on the psychological outcome variables that is jointly significant
+ for the group of outcome variables.
+ We report the test statistics for the SUR estimation in the last column
+ of the results tables.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+singlespace
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "wvs"
+options "pnas"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+endsinglespace
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Psychological variables of interest
+\end_layout
+
+\end_inset
+
+Psychological variables of interest.
+\begin_inset CommandInset label
+LatexCommand label
+name "psychvar_overview"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+textwidth}{!}{%
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+footnotesize
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Variable name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Survey question
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Waves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bf
+\backslash
+specialcell[t]{Number of
+\backslash
+
+\backslash
+respondents}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+bf
+\backslash
+specialcell[t]{Number of
+\backslash
+
+\backslash
+countries}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Control
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Some people believe that individuals can decide their own destiny, while
+ others think that it is impossible to escape a predetermined fate.
+ Please tell me which comes closest to your view on this scale on which
+ 1 means "everything in life is determined by fate," and 10 means that "people
+ shape their fate themselves."
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2005-2008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+114,378
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+43
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Intrinsic motivation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+I do the best I can regardless of pay (0=no, 1=yes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1989-1993
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+68,862
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wouldn't work
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Working for a living is a necessity; I wouldn't work if I didn't have to
+ (0=not mentioned, 1=mentioned
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1989-1993
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+68,862
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Trust
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Do you trust people you meet for the very first time? (1=not trust at all,
+ 5=trust completely)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2005-2008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+120,149
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Help family
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Would you be prepared to actually do something to improve the conditions
+ of your immediate family? (1=absolutely no, 5=absolutely yes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1999-2004
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+61,163
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lonely
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+During the past few weeks, did you ever feel very lonely or remote from
+ other people? (0=no, 1=yes)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1981-1984
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31,541
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Meaningless
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+How often, if at all, do you have the feeling that life is meaningless?
+ (1=never, 4=often)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1981-1984
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31,302
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shortsighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Do you tend to agree or disagree with the following statement: The future
+ is so uncertain that it is best to live from day to day.
+ (0=tend to disagree, 1=tend to agree)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+specialcell[t]{1981-1984,
+\backslash
+
+\backslash
+1999-2004}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47,913
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Risktaking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Would you please indicate how much this person is like you? Adventure and
+ taking risks are important to this person; to have an exciting life.
+ (1=not at all like me; 6=very much like me)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2005-2008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+120,522
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relationship between psychological outcomes and income decile within countries.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig_micro-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename ../figs/micro1.eps
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relationship between psychological outcomes and log GDP across countries.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig_macro"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename ../figs/macro1_lgdp_2013.eps
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering 
+\backslash
+begin{threeparttable} 
+\backslash
+vspace{30 mm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Within-country results: Income decile and psychological outcomes
+\lang american
+
+\begin_inset CommandInset label
+LatexCommand label
+name "within"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+scriptsize
+\end_layout
+
+\end_inset
+
+
+\lang american
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "../outreg_new/micro_inc.tex"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tablenotes}[flushleft] 
+\backslash
+scriptsize 
+\backslash
+item 
+\backslash
+emph{Notes:} 
+\end_layout
+
+\begin_layout Plain Layout
+
+Relationship between income decile and psychological outcomes within countries.
+ Columns (1)--(9) represent OLS regressions of the psychological variables
+ of interest from the World Value Survey data on the income decile of each
+ respondent relative to respondents in their country in the year of the
+ survey.
+ The dependent variables are z-scored, and thus each coefficient represents
+ the standard deviation change in the dependent variable associated with
+ a ten percentage point increase in income.
+ Standard errors are clustered at the country-year level and  reported in
+ parentheses.
+ All specifications include country-year fixed effects.
+ Column (10) shows the chi2 statistic and 
+\backslash
+emph{p}-value of the SUR test of joint significance on the income decile
+ coefficients of all regressions.
+ * denotes significance at 10 pct., ** at 5 pct., and *** at 1 pct.
+ level.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{30 mm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tablenotes} 
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering 
+\backslash
+begin{threeparttable} 
+\backslash
+vspace{30 mm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Cross-country results: Log GDP and psychological outcomes
+\lang american
+
+\begin_inset CommandInset label
+LatexCommand label
+name "across_lgdp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+scriptsize
+\end_layout
+
+\end_inset
+
+
+\lang american
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "../outreg_new/macro_lgdp.tex"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tablenotes}[flushleft] 
+\backslash
+scriptsize 
+\backslash
+item 
+\backslash
+emph{Notes:} 
+\end_layout
+
+\begin_layout Plain Layout
+
+Relationship between log GDP and psychological outcomes across countries.
+ Columns (1)--(9) represent OLS regressions of the psychological variables
+ of interest from the World Value Survey data on the log GDP of the country
+ of each respondent in the year of the survey.
+ The dependent variables are z-scored, and thus each coefficient represents
+ the standard deviation change in the dependent variable associated with
+ a one log unit increase in GDP.
+  Standard errors are clustered at the country-year level and reported in
+ parentheses.
+ Column (10) shows the chi2 statistic and 
+\backslash
+emph{p}-value of the SUR test of joint significance on the income decile
+ coefficients of all regressions.
+ * denotes significance at 10 pct., ** at 5 pct., and *** at 1 pct.
+ level.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{30 mm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tablenotes} 
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering 
+\backslash
+thispagestyle{empty} 
+\backslash
+begin{threeparttable} 
+\backslash
+vspace{30 mm}
+\end_layout
+
+\end_inset
+
+
+\lang american
+
+\begin_inset CommandInset label
+LatexCommand label
+name "across_ineq"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Cross-country results: Inequality and psychological outcomes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+scriptsize
+\end_layout
+
+\end_inset
+
+
+\lang american
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "../outreg_new/macro_ineq.tex"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tablenotes}[flushleft] 
+\backslash
+scriptsize 
+\backslash
+item 
+\backslash
+emph{Notes:} 
+\end_layout
+
+\begin_layout Plain Layout
+
+Relationship between inequality and psychological outcomes across countries.
+ Columns (1)--(9) represent OLS regressions of the psychological variables
+ of interest from the World Value Survey data on inequality in the country
+ of each respondent in the year of the survey.
+ The dependent variables are z-scored, and thus each coefficient represents
+ the standard deviation change in the dependent variable associated with
+ a 100% increase in inequality.
+  Standard errors are clustered at the country-year level and reported in
+ parentheses.
+ Column (10) shows the chi2 statistic and 
+\backslash
+emph{p}-value of the SUR test of joint significance on the income decile
+ coefficients of all regressions.
+ * denotes significance at 10 pct., ** at 5 pct., and *** at 1 pct.
+ level.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{30 mm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tablenotes} 
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagebreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering 
+\backslash
+begin{threeparttable} 
+\backslash
+vspace{30 mm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+Cross-country results: Growth and psychological outcomes
+\lang american
+
+\begin_inset CommandInset label
+LatexCommand label
+name "across_growth"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+scriptsize
+\end_layout
+
+\end_inset
+
+
+\lang american
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "../outreg_new/macro_growth.tex"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tablenotes}[flushleft] 
+\backslash
+scriptsize 
+\backslash
+item 
+\backslash
+emph{Notes:} 
+\end_layout
+
+\begin_layout Plain Layout
+
+Relationship between GDP growth and psychological outcomes across countries.
+ Columns (1)--(9) represent OLS regressions of the psychological variables
+ of interest from the World Value Survey data on the GDP growth of the country
+ of each respondent in the year of the survey.
+ The dependent variables are z-scored, and thus each coefficient represents
+ the standard deviation change in the dependent variable associated with
+ a 100% increase in GDP growth.
+  Standard errors are clustered at the country-year level and reported in
+ parentheses.
+ Column (10) shows the chi2 statistic and 
+\backslash
+emph{p}-value of the SUR test of joint significance on the income decile
+ coefficients of all regressions.
+ * denotes significance at 10 pct., ** at 5 pct., and *** at 1 pct.
+ level.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{30 mm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tablenotes} 
+\backslash
+end{threeparttable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
