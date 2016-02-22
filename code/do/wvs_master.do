@@ -57,6 +57,16 @@ if $summaryflag do "$do_dir/wvs_summary.do"
 if $figuresflag do "$do_dir/wvs_figures.do"
 if $estimateflag do "$do_dir/wvs_estimate.do"
 
+/* Temporary program */
+
+do merge_evs.do   			  // Input: xwvsevs_1981_2000_v20060423.dta, Output: wvsevs.dta
+do setup_micro.do 			  // Input: wvsevs.dta, Output: micro.dta
+do setup_micro_standardize.do // Input: micro.dta, Output: micro_standardized.dta
+do setup_micro_geo.do 		  // Input: micro.dta, Output: micro_standardized_geo.dta
+do setup_macro.do 			  // Input: micro.dta, Output: macro_reg_3.dta
+do setup_macro_reg_splice.do  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
+do setup_macro_merge_geo.do   // Input: macro_reg.dta, Output: macro_reg_geo.dta
+
 timer off 1
 qui timer list 1
 di "Finished in `r(t1)' seconds."
