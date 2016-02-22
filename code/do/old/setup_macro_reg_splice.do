@@ -1,5 +1,5 @@
 forvalues x=1/3 {
-	use macro_reg_`x'.dta, clear
+	use "$data_dir/Clean/macro_reg_`x'.dta", clear
 	capture drop _merge
 	sort cty wave
 	save, replace

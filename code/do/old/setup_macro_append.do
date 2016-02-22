@@ -1,11 +1,11 @@
 **************** MAKE MACRO FILE *****************************
-use "micro.dta", clear
+use "$data_dir/Clean/micro.dta", clear
 
 drop a0* b0* c0* d0* e0* f0* g0*
 
 * Merge in GDP data
 sort cty year
-merge cty year using "gdp/gdp_growth.dta"
+merge cty year using "$data_dir/Clean/gdp_growth.dta"
 drop if _merge==2
 tab country if _merge==1
 drop if gdp==.
@@ -34,15 +34,17 @@ foreach X of varlist educyears educlevel {
 keep if tag==1
 keep cty wave educyears_hat educlevel_hat
 keep if wave ==2005
-sort cty wave 
-save "temp.dta", replace
+sort cty wave
 
-use macro_reg.dta, clear
+tempfile temp 
+save `temp', replace
+
+use "$data_dir/Clean/macro_reg.dta", clear
 capture drop educyears_hat 
 capture drop educlevel_hat
 capture drop educyears
 capture drop _merge
 sort cty wave
-merge cty wave using temp.dta
+merge cty wave using `temp'
 l cty wave _merge if _merge ~=3
 save, replace

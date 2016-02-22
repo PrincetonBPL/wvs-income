@@ -24,8 +24,7 @@ glo do_dir "$project_dir/code/do"
 glo fig_dir "$project_dir/figures"
 glo tab_dir "$project_dir/tables"
 
-sysdir set PERSONAL "$ado_dir"
-cap cd "$project_dir"
+sysdir set PERSONAL "$ado_dir/personal"
 
 /* Customize program */
 
@@ -51,6 +50,8 @@ glo currentdate = date("$S_DATE", "DMY")
 glo date : di %td_CY.N.D date("$S_DATE", "DMY")
 glo stamp = trim("$date")
 
+/* Tentative scripts */
+
 if $builddataflag do "$do_dir/wvs_build.do"
 if $cleandataflag do "$do_dir/wvs_clean.do"
 if $summaryflag do "$do_dir/wvs_summary.do"
@@ -67,6 +68,7 @@ do "$do_dir/old/setup_micro_merge_geo.do"   // Input: micro_standardized.dta, Ou
 do "$do_dir/old/setup_macro.do" 			// Input: micro.dta, Output: macro_reg_3.dta
 do "$do_dir/old/setup_macro_reg_splice.do"  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
 do "$do_dir/old/setup_macro_merge_geo.do"   // Input: macro_reg.dta, Output: macro_reg_geo.dta
+do "$do_dir/old/setup_macro_append.do"      // Input: macro_reg.dta, micro.dta, Output: macro_reg.dta
 
 timer off 1
 qui timer list 1
