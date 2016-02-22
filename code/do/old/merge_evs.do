@@ -1,4 +1,4 @@
-use xwvsevs_1981_2000_v20060423.dta, clear
+use "$data_dir/WVS-EVS/xwvsevs_1981_2000_v20060423.dta", clear
 
 * Filter for EVS, excluding Sweden 1999 which is already in the WVS 5-wave aggregate.
 keep if s001==1 & s021 != 75204111999
@@ -184,9 +184,9 @@ replace c042b2 = . if s003==752
 * f152a,f153a,f154a,f155a,f160a,f161a,f163a
 * SKIP THIS - i don't see those vars in the dataset. 
 
-save evs_1981_1999.dta, replace
+save "$data_dir/Clean/evs_1981_1999.dta", replace
 
-use wvs1981_2008_v20090914.dta, clear
-append using evs_1981_1999.dta, gen(study)
+use "$data_dir/WVS-EVS/wvs1981_2008_v20090914.dta", clear
+append using "$data_dir/WVS-EVS/evs_1981_1999.dta", gen(study)
 
-save ../out/wvsevs.dta, replace
+save "$data_dir/Clean/wvsevs.dta", replace

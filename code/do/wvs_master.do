@@ -18,9 +18,9 @@ cd "../../"
 ***********
 
 glo project_dir "`c(pwd)'" 
-glo ado_dir "$project_dir/code/stata/ado/personal"
-glo data_dir "$project_dir/data"
-glo do_dir "$project_dir/code/stata"
+glo ado_dir "$project_dir/code/ado"
+glo data_dir "/Users/Justin/Box Sync/_Behavior and Policy Lab/WVS and Income/data"
+glo do_dir "$project_dir/code/do"
 glo fig_dir "$project_dir/figures"
 glo tab_dir "$project_dir/tables"
 
@@ -57,15 +57,16 @@ if $summaryflag do "$do_dir/wvs_summary.do"
 if $figuresflag do "$do_dir/wvs_figures.do"
 if $estimateflag do "$do_dir/wvs_estimate.do"
 
-/* Temporary program */
+/* Old scripts */
 
-do merge_evs.do   			  // Input: xwvsevs_1981_2000_v20060423.dta, Output: wvsevs.dta
-do setup_micro.do 			  // Input: wvsevs.dta, Output: micro.dta
-do setup_micro_standardize.do // Input: micro.dta, Output: micro_standardized.dta
-do setup_micro_geo.do 		  // Input: micro.dta, Output: micro_standardized_geo.dta
-do setup_macro.do 			  // Input: micro.dta, Output: macro_reg_3.dta
-do setup_macro_reg_splice.do  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
-do setup_macro_merge_geo.do   // Input: macro_reg.dta, Output: macro_reg_geo.dta
+do "$do_dir/old/gdp.do" 					// And another do file from the geo folder
+do "$do_dir/old/merge_evs.do"  			    // Input: xwvsevs_1981_2000_v20060423.dta, Output: wvsevs.dta
+do "$do_dir/old/setup_micro.do" 		    // Input: wvsevs.dta, Output: micro.dta
+do "$do_dir/old/setup_micro_standardize.do" // Input: micro.dta, Output: micro_standardized.dta
+do "$do_dir/old/setup_micro_merge_geo.do"   // Input: micro_standardized.dta, Output: micro_standardized_geo.dta
+do "$do_dir/old/setup_macro.do" 			// Input: micro.dta, Output: macro_reg_3.dta
+do "$do_dir/old/setup_macro_reg_splice.do"  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
+do "$do_dir/old/setup_macro_merge_geo.do"   // Input: macro_reg.dta, Output: macro_reg_geo.dta
 
 timer off 1
 qui timer list 1

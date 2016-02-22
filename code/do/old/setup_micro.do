@@ -1,5 +1,5 @@
 clear
-use "merge_evs/wvsevs.dta", clear
+use "$data_dir/Clean/wvsevs.dta", clear
 
 * Using s003a as the country variable: Today's countries, followed back through history.
 gen str3 cty=""
@@ -464,7 +464,7 @@ gen lninc = ln(inc)
 egen ctyyear = group(cty year)
 
 compress
-saveold "micro.dta", replace
+saveold "$data_dir/Clean/micro.dta", replace
 
 * * now compute MLD - SKIP THIS
 * * s024a is country-wave variable

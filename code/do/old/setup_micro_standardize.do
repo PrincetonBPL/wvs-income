@@ -3,7 +3,7 @@
 
 clear
 
-use "micro.dta" if nonrepresentative==0, clear
+use "$data_dir/Clean/micro.dta" if nonrepresentative==0, clear
 
 drop s001 - f163a
 drop trustfriends trustrelatives
@@ -49,4 +49,4 @@ foreach X of varlist shapefateyrself wouldntwork intrinsic trustmeetfirsttime he
 		}
 	}
 		
-save micro_standardized.dta, replace 
+save "$data_dir/Clean/micro_standardized.dta", replace 
