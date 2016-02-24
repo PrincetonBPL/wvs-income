@@ -1,5 +1,5 @@
 ******* GDP ***************
-insheet using "$data_dir/WDI/WDI_GDF_Data.csv", names clear
+insheet using "$data_dir/WDI_GDF/WDI_GDF_Data.csv", names clear
 keep if seriescode == "NY.GDP.PCAP.PP.KD"
 keep countrycode v*
 rename countrycode cty
@@ -24,7 +24,7 @@ tempfile ineq
 save `ineq', replace
 
 ******** GROWTH **************
-insheet using "$data_dir/WDI/WDI_GDF_Data.csv", names clear
+insheet using "$data_dir/WDI_GDF/WDI_GDF_Data.csv", names clear
 keep if seriescode == "NY.GDP.MKTP.KD.ZG"
 keep countrycode v*
 rename countrycode cty

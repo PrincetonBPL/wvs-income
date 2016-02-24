@@ -20,6 +20,7 @@ keep $controls cty ctywave cw_* c_* y_* w_* wave year wt1000 hap sat inc lninc b
 *erase firstresults_likewolfers.txt
 sort cty year
 merge cty year using "$data_dir/Clean/gdp_growth.dta"
+e
 * merge cty year using "Wolfers data\Processed files\Complete_GDP.dta"
 drop if _merge==2
 tab cty if _merge==1
