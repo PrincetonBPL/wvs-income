@@ -28,7 +28,7 @@ sysdir set PERSONAL "$ado_dir/personal"
 
 /* Customize program */
 
-glo builddataflag = 0		 // Build combined dataset from raw
+glo builddataflag = 1		 // Build combined dataset from raw
 glo cleandataflag = 0		 // Clean combined dataset
 glo summaryflag = 0	 		 // Output summary stats
 glo estimateflag = 0         // Output regression tables
@@ -60,15 +60,15 @@ if $estimateflag do "$do_dir/wvs_estimate.do"
 
 /* Old scripts */
 
-do "$do_dir/old/gdp.do" 					// And another do file from the geo folder
-do "$do_dir/old/merge_evs.do"  			    // Input: xwvsevs_1981_2000_v20060423.dta, Output: wvsevs.dta
-do "$do_dir/old/setup_micro.do" 		    // Input: wvsevs.dta, Output: micro.dta
-do "$do_dir/old/setup_micro_standardize.do" // Input: micro.dta, Output: micro_standardized.dta
-do "$do_dir/old/setup_micro_merge_geo.do"   // Input: micro_standardized.dta, Output: micro_standardized_geo.dta
-do "$do_dir/old/setup_macro.do" 			// Input: micro.dta, Output: macro_reg_3.dta
-do "$do_dir/old/setup_macro_reg_splice.do"  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
-do "$do_dir/old/setup_macro_merge_geo.do"   // Input: macro_reg.dta, Output: macro_reg_geo.dta
-do "$do_dir/old/setup_macro_append.do"      // Input: macro_reg.dta, micro.dta, Output: macro_reg.dta
+* do "$do_dir/old/gdp.do" 					// And another do file from the geo folder
+* do "$do_dir/old/merge_evs.do"  			    // Input: xwvsevs_1981_2000_v20060423.dta, Output: wvsevs.dta
+* do "$do_dir/old/setup_micro.do" 		    // Input: wvsevs.dta, Output: micro.dta
+* do "$do_dir/old/setup_micro_standardize.do" // Input: micro.dta, Output: micro_standardized.dta
+* do "$do_dir/old/setup_micro_merge_geo.do"   // Input: micro_standardized.dta, Output: micro_standardized_geo.dta
+* do "$do_dir/old/setup_macro.do" 			// Input: micro.dta, Output: macro_reg_3.dta
+* do "$do_dir/old/setup_macro_reg_splice.do"  // Input: macro_reg_`i'.dta, Output: macro_reg.dta
+* do "$do_dir/old/setup_macro_merge_geo.do"   // Input: macro_reg.dta, Output: macro_reg_geo.dta
+* do "$do_dir/old/setup_macro_append.do"      // Input: macro_reg.dta, micro.dta, Output: macro_reg.dta
 
 timer off 1
 qui timer list 1

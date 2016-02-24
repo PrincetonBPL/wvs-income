@@ -32,6 +32,7 @@ Temporary Items
 ### Stata ###
 # Binary data formats
 *.dta
+sublime2stata.do
 
 
 ### MicrosoftOffice ###
