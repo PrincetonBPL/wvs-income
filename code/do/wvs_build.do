@@ -8,16 +8,25 @@
 ** National income measures **
 ******************************
 
+/* ISO country codes */
+
+import delim "$data_dir/ISO/ISOcountryCodes.csv", varnames(1) clear
+
+* drop name
+
+tempfile iso
+save `iso', replace
+
 /* Texas Inequality (????) */
 
 import delim "$data_dir/Texas/inequality_AVE.csv", varnames(1) clear
 
 drop country
-ren code countrycode
+ren code alpha3
 ren avg9099 inequality
 la var inequality "avg9099"
 
-sort countrycode
+sort alpha3
 
 tempfile inequality
 save `inequality', replace
@@ -27,17 +36,17 @@ save `inequality', replace
 import delim "$data_dir/WDI_GDF/WDI_GDF_Data.csv", varnames(1) clear
 
 keep if seriescode == "NY.GDP.PCAP.PP.KD" | seriescode == "NY.GDP.MKTP.KD.ZG"
-
 encode seriescode, gen(series)
-encode countrycode, gen(country)
 
 ren v* v*_
-reshape wide v*_ seriescode seriesname, i(country) j(series)
+ren countrycode alpha3
+
+reshape wide v*_ seriescode seriesname, i(alpha3) j(series)
 
 ren v*_1 gdpgrowth*
 ren v*_2 gdppercapita*
 
-reshape long gdpgrowth gdppercapita, i(country) j(year)
+reshape long gdpgrowth gdppercapita, i(alpha3) j(year)
 
 replace year = year + 1955
 
@@ -47,14 +56,20 @@ la var gdppercapita `r(levels)'
 levelsof seriesname1
 la var gdpgrowth `r(levels)'
 
-merge m:1 countrycode using `inequality'
+replace alpha3 = "AND" if alpha3 == "ADO"
+replace alpha3 = "ROU" if alpha3 == "ROM"
+replace alpha3 = "TLS" if alpha3 == "TMP"
+replace alpha3 = "COD" if alpha3 == "ZAR"
+
+merge m:1 alpha3 using `inequality'
 
 keep if _merge != 2
+drop _merge
 
-drop series* countrycode _merge
+merge m:1 alpha3 using `iso' 
 
-levelsof countryname
-glo wdi_names `r(levels)'
+keep if _merge != 2 & alpha2 != ""
+drop series*  _merge
 
 tempfile national
 save `national', replace
@@ -273,7 +288,18 @@ replace countryname = "Trinidad and Tobago" if countryname == "Trinidad And Toba
 replace countryname = "Venezuela, RB" if countryname == "Venezuela"
 replace countryname = "Vietnam" if countryname == "Viet Nam"
 
-merge m:1 countryname year using `national'
+ren s009 alpha2
+merge m:1 alpha2 year using `national'
+
+keep if _merge != 2
+drop _merge
+
+tempfile wvs
+save `wvs', replace
+
+***********************************
+** Temperature and precipitation **
+***********************************
 
 save "$data_dir/Clean/wvs_panel.dta", replace
 
