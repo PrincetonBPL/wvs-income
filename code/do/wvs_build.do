@@ -12,67 +12,121 @@
 
 import delim "$data_dir/ISO/ISOcountryCodes.csv", varnames(1) clear
 
-* drop name
+drop name
 
 tempfile iso
 save `iso', replace
 
-/* Texas Inequality (????) */
+/* WDI and GDF (1980 - 2015) */
 
-import delim "$data_dir/Texas/inequality_AVE.csv", varnames(1) clear
+import delim "$data_dir/WDI_csv/WDI_Data.csv", varnames(1) clear
 
-drop country
-ren code alpha3
-ren avg9099 inequality
-la var inequality "avg9099"
-
-sort alpha3
-
-tempfile inequality
-save `inequality', replace
-
-/* WDI and GDF (1980 - 2009) */
-
-import delim "$data_dir/WDI_GDF/WDI_GDF_Data.csv", varnames(1) clear
-
-keep if seriescode == "NY.GDP.PCAP.PP.KD" | seriescode == "NY.GDP.MKTP.KD.ZG"
-encode seriescode, gen(series)
+keep if indicatorcode == "NY.GDP.MKTP.KD.ZG" | indicatorcode == "NY.GDP.PCAP.PP.CD" | indicatorcode == "NY.GDP.PCAP.PP.KD" | indicatorcode == "SI.POV.GINI"
+encode indicatorcode, gen(series)
 
 ren v* v*_
 ren countrycode alpha3
 
-reshape wide v*_ seriescode seriesname, i(alpha3) j(series)
+reshape wide v*_ indicatorcode indicatorname, i(alpha3) j(series)
 
-ren v*_1 gdpgrowth*
-ren v*_2 gdppercapita*
+ren v*_1 gdp_growth*
+ren v*_2 gdp_percapita*
+ren v*_3 gdp_2011percapita*
+ren v*_4 gini*
 
-reshape long gdpgrowth gdppercapita, i(alpha3) j(year)
+reshape long gdp_growth gdp_percapita gdp_2011percapita gini, i(alpha3) j(year)
 
+la var year "Year"
 replace year = year + 1955
 
-levelsof seriesname2
-la var gdppercapita `r(levels)'
+levelsof indicatorname1
+la var gdp_growth `r(levels)'
 
-levelsof seriesname1
-la var gdpgrowth `r(levels)'
+levelsof indicatorname2
+la var gdp_percapita `r(levels)'
+
+levelsof indicatorname3
+la var gdp_2011percapita `r(levels)'
+
+levelsof indicatorname4
+la var gini `r(levels)'
 
 replace alpha3 = "AND" if alpha3 == "ADO"
 replace alpha3 = "ROU" if alpha3 == "ROM"
 replace alpha3 = "TLS" if alpha3 == "TMP"
 replace alpha3 = "COD" if alpha3 == "ZAR"
 
-merge m:1 alpha3 using `inequality'
-
-keep if _merge != 2
-drop _merge
-
 merge m:1 alpha3 using `iso' 
 
-keep if _merge != 2 & alpha2 != ""
-drop series*  _merge
+drop if _merge == 1
+drop indicator* _merge
 
 tempfile national
 save `national', replace
+
+***********************************
+** Temperature and precipitation **
+***********************************
+
+/* U Delaware Air Temperature (1900 - 2014) */
+
+* loc datalist : dir "$data_dir/UDelaware/air_temp_2014" files "air_temp.*"
+
+* foreach csv in `datalist' {
+
+* 	loc root = substr("`csv'", -4, .)
+
+* 	if "`root'" == "1900" {
+
+* 		import delim "$data_dir/UDelaware/air_temp_2014/`csv'", delim(" ", collapse) clear
+* 		gen year = real("`root'")
+* 		tempfile temperature
+* 		save `temperature', replace
+
+* 	}
+
+* 	else {
+
+* 		import delim "$data_dir/UDelaware/air_temp_2014/`csv'", delim(" ", collapse) clear
+* 		gen year = real("`root'")
+* 		append using `temperature'
+* 		save `temperature', replace
+
+* 	}
+
+* }
+
+* drop v15
+
+/* U Delaware Precipitation (1900 - 2014) */
+
+* loc datalist : dir "$data_dir/UDelaware/precip_2014" files "precip.*"
+
+* foreach csv in `datalist' {
+
+* 	loc root = substr("`csv'", -4, .)
+
+* 	if "`root'" == "1900" {
+
+* 		import delim "$data_dir/UDelaware/precip_2014/`csv'", delim(" ", collapse) clear
+* 		gen year = real("`root'")
+* 		tempfile precipitation
+* 		save `precipitation', replace
+
+* 	}
+
+* 	else {
+
+* 		import delim "$data_dir/UDelaware/precip_2014/`csv'", delim(" ", collapse) clear
+* 		gen year = real("`root'")
+* 		append using `precipitation'
+* 		save `precipitation', replace
+
+* 	}
+
+* }
+
+* drop v15
 
 ************************
 ** World Value Survey **
@@ -289,9 +343,12 @@ replace countryname = "Venezuela, RB" if countryname == "Venezuela"
 replace countryname = "Vietnam" if countryname == "Viet Nam"
 
 ren s009 alpha2
+replace alpha2 = "RS" if s003 == 911 | (s003 == 891 & s003a == 911)
+replace alpha2 = "ME" if s003 == 891 & s003a == 912
+
 merge m:1 alpha2 year using `national'
 
-keep if _merge != 2
+drop if _merge == 2
 drop _merge
 
 tempfile wvs

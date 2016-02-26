@@ -77,3 +77,12 @@ di "Finished in `r(t1)' seconds."
 /**********
 ** Notes **
 ***********
+
+Update WVS and EVS
+Complete integration of WVS and EVS
+Where is Taiwain in WDI?
+Choose a better measure of inequality (Theil, etc.)
+Is there a valid instrument out there? (Maybe temperature fluctuations for anything not happiness)
+What to do about countries that change over time?
+Should we split up the code for building each dataset?
+
